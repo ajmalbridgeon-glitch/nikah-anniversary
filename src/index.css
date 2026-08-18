@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: #0B0908;
+    color: #F5EFEB;
+  }
+
+  body {
+    background-color: #0B0908;
+    background-image: 
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(212, 175, 55, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 50% 120%, rgba(197, 168, 128, 0.05), transparent);
+    background-attachment: fixed;
+    overflow-x: hidden;
+  }
+
+  /* Custom subtle luxury scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #0B0908;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2A241F;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #D4AF37;
+  }
+}
+
+@layer utilities {
+  /* Luxury Glassmorphism */
+  .glass-card {
+    background: rgba(18, 15, 13, 0.65);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(212, 175, 55, 0.18);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-card-hover {
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .glass-card-hover:hover {
+    background: rgba(26, 21, 18, 0.78);
+    border-color: rgba(212, 175, 55, 0.45);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 25px rgba(212, 175, 55, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.15);
+    transform: translateY(-4px);
+  }
+
+  /* Liquid Glass Pill Button from Reference Image */
+  .btn-liquid-glass {
+    position: relative;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(20, 16, 14, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(212, 175, 55, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.3), inset 0 -1px 2px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn-liquid-glass:hover {
+    border-color: rgba(212, 175, 55, 0.7);
+    box-shadow: 0 12px 40px rgba(212, 175, 55, 0.22), inset 0 1px 3px rgba(255, 255, 255, 0.45);
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  /* Golden glow ambient effects */
+  .glow-gold {
+    box-shadow: 0 0 35px rgba(212, 175, 55, 0.25);
+  }
+  .text-glow-gold {
+    text-shadow: 0 0 20px rgba(212, 175, 55, 0.35);
+  }
+
+  /* Shimmer gradient for text */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #FFF5E1 0%, #D4AF37 50%, #C5A880 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .text-cream-gradient {
+    background: linear-gradient(180deg, #FFFFFF 0%, #E8DCCF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
