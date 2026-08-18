@@ -103,8 +103,8 @@ export default function OpeningIntro({ onComplete, onMusicStart }) {
           </div>
 
           {/* 2. Top Header Bar */}
-          <div className="relative z-30 w-full flex justify-between items-center px-6 pt-6 pointer-events-none">
-            <span className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-gold-300/80 font-medium drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+          <div className="relative z-30 w-full flex justify-center items-center px-6 pt-8 pointer-events-none">
+            <span className="text-[10px] sm:text-xs uppercase tracking-[0.35em] text-gold-300 font-medium drop-shadow-[0_2px_12px_rgba(0,0,0,0.95)] text-center">
               {anniversaryYear} • {nikahDate}
             </span>
             {stage > 0 && (
@@ -113,7 +113,7 @@ export default function OpeningIntro({ onComplete, onMusicStart }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.7 }}
                 whileTap={{ scale: 0.95 }}
-                className="pointer-events-auto text-[9px] uppercase tracking-[0.25em] text-cream-200 px-3.5 py-1.5 border border-gold-500/30 rounded-full backdrop-blur-md bg-black/40 hover:opacity-100 transition-opacity"
+                className="absolute right-6 top-7 pointer-events-auto text-[9px] uppercase tracking-[0.25em] text-cream-200 px-3.5 py-1.5 border border-gold-500/30 rounded-full backdrop-blur-md bg-black/40 hover:opacity-100 transition-opacity"
               >
                 Skip ✕
               </motion.button>
