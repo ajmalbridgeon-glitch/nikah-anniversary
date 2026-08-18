@@ -47,23 +47,23 @@ export const anniversaryConfig = {
   // ── 4. FLOATING AUDIO / PLAYLIST ──────────────────────────────────────
   music: {
     enabled: true,
-    title: "Our Love Song ❤️",
-    subtitle: "Sweet Islamic Melody",
+    title: "Wedding Nasheed 💍",
+    subtitle: "Muhammad Al Muqit",
     playlist: [
       {
         id: "track-1",
-        title: "Our Love Melody ❤️",
-        subtitle: "Sweet Islamic Melody",
-        url: "/photos/anniversary_music.webm",
-      },
-      {
-        id: "track-2",
         title: "Wedding Nasheed 💍",
         subtitle: "Muhammad Al Muqit",
         url: "/photos/track_02.mp3",
+      },
+      {
+        id: "track-2",
+        title: "Our Love Melody ❤️",
+        subtitle: "Sweet Islamic Melody",
+        url: "/photos/anniversary_music.webm",
       }
     ],
-    customAudioUrl: "/photos/anniversary_music.webm",
+    customAudioUrl: "/photos/track_02.mp3",
   },
 
   // ── 5. OUR STORY TIMELINE ─────────────────────────────────────────────

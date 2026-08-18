@@ -3,15 +3,15 @@
 const defaultPlaylist = [
   {
     id: "track-1",
-    title: "Our Love Melody ❤️",
-    subtitle: "Sweet Islamic Melody",
-    url: "/photos/anniversary_music.webm",
-  },
-  {
-    id: "track-2",
     title: "Wedding Nasheed 💍",
     subtitle: "Muhammad Al Muqit",
     url: "/photos/track_02.mp3",
+  },
+  {
+    id: "track-2",
+    title: "Our Love Melody ❤️",
+    subtitle: "Sweet Islamic Melody",
+    url: "/photos/anniversary_music.webm",
   }
 ];
 
