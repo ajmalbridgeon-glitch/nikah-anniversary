@@ -1,5 +1,19 @@
-// Universal Audio Engine supporting HTML5 Audio playback (with loop, seek, volume)
-// and procedural fallback synthesis.
+// Universal Audio Engine supporting HTML5 Audio playback (with multi-track playlist, seek, volume)
+
+const defaultPlaylist = [
+  {
+    id: "track-1",
+    title: "Our Love Melody ❤️",
+    subtitle: "Sweet Islamic Melody",
+    url: "/photos/anniversary_music.webm",
+  },
+  {
+    id: "track-2",
+    title: "Wedding Nasheed 💍",
+    subtitle: "Muhammad Al Muqit",
+    url: "/photos/track_02.mp3",
+  }
+];
 
 class AnniversaryAudioEngine {
   constructor() {
@@ -9,14 +23,15 @@ class AnniversaryAudioEngine {
     this.duration = 0;
     this.volume = 0.75;
     this.isMuted = false;
+    this.currentTrackIndex = 0;
+    this.playlist = defaultPlaylist;
     this.listeners = new Set();
-    this.customUrl = '/photos/anniversary_music.webm';
   }
 
   getAudio() {
     if (!this.audioElement) {
       this.audioElement = new Audio();
-      this.audioElement.src = this.customUrl;
+      this.audioElement.src = this.playlist[this.currentTrackIndex]?.url || '/photos/anniversary_music.webm';
       this.audioElement.loop = true;
       this.audioElement.volume = this.volume;
       this.audioElement.preload = 'auto';
@@ -53,7 +68,6 @@ class AnniversaryAudioEngine {
 
   subscribe(listener) {
     this.listeners.add(listener);
-    // Initial call
     listener(this.getState());
     return () => this.listeners.delete(listener);
   }
@@ -66,23 +80,58 @@ class AnniversaryAudioEngine {
   }
 
   getState() {
+    const currentTrack = this.playlist[this.currentTrackIndex] || this.playlist[0];
     return {
       isPlaying: this.isPlaying,
       currentTime: this.currentTime,
       duration: this.duration,
       volume: this.volume,
       isMuted: this.isMuted,
+      currentTrackIndex: this.currentTrackIndex,
+      currentTrack: currentTrack,
+      playlist: this.playlist,
     };
   }
 
-  async play(url = null) {
-    if (url && url !== this.customUrl) {
-      this.customUrl = url;
-      if (this.audioElement) {
-        this.audioElement.src = url;
+  async playTrack(index) {
+    if (index >= 0 && index < this.playlist.length) {
+      this.currentTrackIndex = index;
+      const track = this.playlist[index];
+      const audio = this.getAudio();
+      audio.src = track.url;
+      audio.currentTime = 0;
+      try {
+        await audio.play();
+        this.isPlaying = true;
+        this.notify();
+        return true;
+      } catch (err) {
+        console.warn('Audio play request waiting for user gesture:', err);
+        this.isPlaying = false;
+        this.notify();
+        return false;
       }
     }
+    return false;
+  }
 
+  nextTrack() {
+    const nextIdx = (this.currentTrackIndex + 1) % this.playlist.length;
+    return this.playTrack(nextIdx);
+  }
+
+  prevTrack() {
+    const prevIdx = (this.currentTrackIndex - 1 + this.playlist.length) % this.playlist.length;
+    return this.playTrack(prevIdx);
+  }
+
+  async play(url = null) {
+    if (url) {
+      const idx = this.playlist.findIndex(t => t.url === url);
+      if (idx !== -1) {
+        return this.playTrack(idx);
+      }
+    }
     const audio = this.getAudio();
     try {
       await audio.play();
@@ -90,7 +139,7 @@ class AnniversaryAudioEngine {
       this.notify();
       return true;
     } catch (err) {
-      console.warn('Audio play request blocked or waiting for user interaction:', err);
+      console.warn('Audio play request blocked:', err);
       this.isPlaying = false;
       this.notify();
       return false;
@@ -142,4 +191,5 @@ class AnniversaryAudioEngine {
 }
 
 export const romanticAudio = new AnniversaryAudioEngine();
+
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, Music, ChevronUp, ChevronDown, RotateCcw } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, SkipBack, SkipForward, Music, ChevronUp, ChevronDown, ListMusic } from 'lucide-react';
 import { anniversaryConfig } from '../data/anniversaryData';
 import { romanticAudio } from '../utils/audioSynth';
 
@@ -33,15 +33,29 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
     romanticAudio.setVolume(newVol);
   };
 
+  const currentTrack = audioState.currentTrack || music.playlist?.[0] || {
+    title: music.title || 'Our Love Song ❤️',
+    subtitle: music.subtitle || 'Sweet Islamic Melody'
+  };
+
   return (
     <div className="fixed bottom-6 left-6 z-40 max-w-[calc(100vw-3rem)]">
       <motion.div
         layout
         className="glass-card rounded-2xl border border-gold-500/30 bg-[#0E0C0B]/95 backdrop-blur-xl shadow-[0_15px_40px_rgba(0,0,0,0.8)] overflow-hidden ring-1 ring-gold-400/20"
       >
-        {/* Top Mini Bar / Summary */}
-        <div className="flex items-center space-x-3 px-4 py-2.5">
-          {/* Play / Pause Toggle Button */}
+        {/* Top Mini Bar / Controls */}
+        <div className="flex items-center space-x-2.5 px-3.5 py-2.5">
+          {/* Previous Track */}
+          <button
+            onClick={() => romanticAudio.prevTrack()}
+            aria-label="Previous Track"
+            className="p-1.5 text-cream-400 hover:text-gold-300 active:scale-95 transition-transform"
+          >
+            <SkipBack className="w-4 h-4" />
+          </button>
+
+          {/* Main Play / Pause Button */}
           <button
             onClick={onToggle}
             aria-label={isPlaying ? 'Pause Music' : 'Play Music'}
@@ -54,14 +68,23 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
             )}
           </button>
 
+          {/* Next Track */}
+          <button
+            onClick={() => romanticAudio.nextTrack()}
+            aria-label="Next Track"
+            className="p-1.5 text-cream-400 hover:text-gold-300 active:scale-95 transition-transform"
+          >
+            <SkipForward className="w-4 h-4" />
+          </button>
+
           {/* Track Details & Status */}
           <div
             onClick={() => setIsExpanded(!isExpanded)}
-            className="flex flex-col text-left cursor-pointer select-none pr-1"
+            className="flex flex-col text-left cursor-pointer select-none px-1"
           >
             <div className="flex items-center space-x-1.5">
-              <span className="text-[9px] uppercase tracking-[0.25em] text-gold-400 font-bold">
-                {isPlaying ? 'NOW PLAYING' : 'ANNIVERSARY MUSIC'}
+              <span className="text-[9px] uppercase tracking-[0.2em] text-gold-400 font-bold">
+                {isPlaying ? 'PLAYING' : 'PAUSED'}
               </span>
               {isPlaying && (
                 <div className="flex items-end space-x-0.5 h-2.5">
@@ -71,8 +94,8 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
                 </div>
               )}
             </div>
-            <span className="font-serif text-xs text-cream-100 font-medium truncate max-w-[140px] sm:max-w-[180px]">
-              {music.title || 'Our Love Song ❤️'}
+            <span className="font-serif text-xs text-cream-100 font-medium truncate max-w-[130px] sm:max-w-[170px]">
+              {currentTrack.title}
             </span>
           </div>
 
@@ -89,11 +112,11 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
             )}
           </button>
 
-          {/* Expand / Collapse Details Chevron */}
+          {/* Expand / Collapse Chevron */}
           <button
             onClick={() => setIsExpanded(!isExpanded)}
             className="p-1 text-cream-400/70 hover:text-gold-300 transition-colors"
-            aria-label="Toggle Full Controller"
+            aria-label="Toggle Full Music Drawer"
           >
             {isExpanded ? (
               <ChevronDown className="w-4 h-4" />
@@ -103,7 +126,7 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
           </button>
         </div>
 
-        {/* Expanded Controls Drawer */}
+        {/* Expanded Drawer: Track Selector & Seek & Volume */}
         <AnimatePresence>
           {isExpanded && (
             <motion.div
@@ -113,8 +136,47 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
               transition={{ duration: 0.3 }}
               className="px-4 pb-4 pt-2 border-t border-gold-500/15 space-y-3"
             >
+              {/* Playlist Selector Buttons */}
+              <div className="space-y-1.5">
+                <div className="flex items-center space-x-1.5 text-[10px] uppercase tracking-wider text-gold-400/80 font-medium">
+                  <ListMusic className="w-3 h-3" />
+                  <span>Choose Music Track</span>
+                </div>
+                <div className="grid grid-cols-1 gap-1.5">
+                  {audioState.playlist?.map((track, idx) => {
+                    const isSelected = audioState.currentTrackIndex === idx;
+                    return (
+                      <button
+                        key={track.id || idx}
+                        onClick={() => romanticAudio.playTrack(idx)}
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-left transition-all ${
+                          isSelected
+                            ? 'bg-gold-500/20 border border-gold-400/40 text-gold-200 shadow-sm'
+                            : 'bg-stone-900/50 hover:bg-stone-800/60 border border-white/5 text-cream-300'
+                        }`}
+                      >
+                        <div className="flex flex-col pr-2 truncate">
+                          <span className="font-serif text-xs font-medium text-cream-100 truncate">
+                            {track.title}
+                          </span>
+                          <span className="text-[9px] text-cream-400/60 font-sans truncate">
+                            {track.subtitle}
+                          </span>
+                        </div>
+                        {isSelected && isPlaying && (
+                          <span className="flex items-center space-x-0.5 text-gold-400 text-[10px] font-sans">
+                            <span className="w-1.5 h-1.5 rounded-full bg-gold-400 animate-ping mr-1" />
+                            Playing
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
               {/* Progress Bar & Timestamps */}
-              <div className="space-y-1">
+              <div className="space-y-1 pt-1">
                 <input
                   type="range"
                   min={0}
@@ -130,8 +192,8 @@ export default function MusicPlayer({ isPlaying, onToggle }) {
                 </div>
               </div>
 
-              {/* Volume Slider Row */}
-              <div className="flex items-center space-x-3 pt-1">
+              {/* Volume Slider */}
+              <div className="flex items-center space-x-3 pt-0.5">
                 <button
                   onClick={() => romanticAudio.toggleMute()}
                   className="text-cream-400 hover:text-gold-300"
