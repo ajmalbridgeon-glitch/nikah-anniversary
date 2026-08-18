@@ -78,6 +78,7 @@ export const anniversaryConfig = {
         date: "AUGUST 19, 2023",
         description: "The moment you stepped into the room in your peach bridal attire, my heart knew every prayer had been answered.",
         image: "/photos/timeline_01.jpg",
+        position: "object-[center_15%]",
       },
       {
         number: "02",
@@ -85,6 +86,7 @@ export const anniversaryConfig = {
         date: "AUGUST 19, 2023",
         description: "With 'Qubool Hai' spoken before Allah and our families, two souls were bound into one eternal covenant. The most blessed day of my life.",
         image: "/photos/timeline_02.jpg",
+        position: "object-center",
         highlight: true,
       },
       {
@@ -93,6 +95,7 @@ export const anniversaryConfig = {
         date: "FEBRUARY 10, 2024",
         description: "Standing proudly beside you on our wedding reception, surrounded by the warmth, love, and prayers of everyone dear to us.",
         image: "/photos/timeline_03.jpg",
+        position: "object-[center_15%]",
       },
       {
         number: "04",
@@ -100,6 +103,7 @@ export const anniversaryConfig = {
         date: "2024 – 2025",
         description: "Learning each other's rhythms, sharing late-night conversations, comforting each other through every season, and realizing home is wherever you are.",
         image: "/photos/timeline_04.jpg",
+        position: "object-[center_70%]",
       },
       {
         number: "05",
@@ -107,6 +111,7 @@ export const anniversaryConfig = {
         date: "MAY 08, 2026",
         description: "On May 8, 2026, Allah blessed our lives with our precious baby boy, Abdan Ahmad. Watching you hold him and become a mother filled my heart with unimaginable gratitude.",
         image: "/photos/timeline_05.jpg",
+        position: "object-[center_45%]",
         highlight: true,
       },
       {
@@ -115,6 +120,7 @@ export const anniversaryConfig = {
         date: "AUGUST 19, 2026 & BEYOND",
         description: "Three years of unconditional love, barakah, and now standing as a blessed family of three with Abdan Ahmad. Looking forward to Jannah together.",
         image: "/photos/timeline_06.jpg",
+        position: "object-[center_40%]",
       },
     ]
   },

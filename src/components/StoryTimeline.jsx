@@ -128,7 +128,7 @@ export default function StoryTimeline() {
                   <img
                     src={evt.image}
                     alt={evt.title}
-                    className="w-full h-full object-cover object-[center_15%] transition-transform duration-700 group-hover:scale-105"
+                    className={`w-full h-full object-cover ${evt.position || 'object-[center_20%]'} transition-transform duration-700 group-hover:scale-105`}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
                   <div className="absolute bottom-4 left-4 inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-black/60 backdrop-blur-md border border-gold-500/30 text-gold-300 text-[10px] tracking-widest uppercase">
@@ -212,11 +212,11 @@ export default function StoryTimeline() {
               </div>
 
               {/* Photo Inset */}
-              <div className="rounded-lg overflow-hidden aspect-[16/11] mb-4 relative shadow-md">
+              <div className="rounded-lg overflow-hidden aspect-[4/3] sm:aspect-[16/10] mb-4 relative shadow-md">
                 <img
                   src={evt.image}
                   alt={evt.title}
-                  className="w-full h-full object-cover object-[center_15%]"
+                  className={`w-full h-full object-cover ${evt.position || 'object-[center_20%]'}`}
                   loading="lazy"
                 />
                 <div className="absolute bottom-2 left-2 px-2.5 py-0.5 rounded-full bg-black/70 backdrop-blur-sm border border-gold-500/30 text-gold-300 text-[9px] tracking-widest uppercase">
