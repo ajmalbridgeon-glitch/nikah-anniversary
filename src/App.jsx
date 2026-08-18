@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import OpeningIntro from './components/OpeningIntro';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
@@ -22,9 +22,15 @@ export default function App() {
   const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const { hearts, triggerHeartBurst } = useHeartBurst();
 
+  useEffect(() => {
+    const unsubscribe = romanticAudio.subscribe((state) => {
+      setIsMusicPlaying(state.isPlaying);
+    });
+    return unsubscribe;
+  }, []);
+
   const handleToggleMusic = () => {
-    const isNowPlaying = romanticAudio.toggle(anniversaryConfig.music.customAudioUrl);
-    setIsMusicPlaying(isNowPlaying);
+    romanticAudio.toggle(anniversaryConfig.music.customAudioUrl);
   };
 
   return (

@@ -47,9 +47,9 @@ export const anniversaryConfig = {
   // ── 4. FLOATING AUDIO / MUSIC ─────────────────────────────────────────
   music: {
     enabled: true,
-    title: "Sweet Acoustic Oud & Ney Nasheed",
-    // Set customAudioUrl to "/photos/your-song.mp3" if you have a special track in public/photos/
-    customAudioUrl: null,
+    title: "Our Love Song ❤️",
+    subtitle: "Sweet Islamic Melody",
+    customAudioUrl: "/photos/anniversary_music.webm",
   },
 
   // ── 5. OUR STORY TIMELINE ─────────────────────────────────────────────
