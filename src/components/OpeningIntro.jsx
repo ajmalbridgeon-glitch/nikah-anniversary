@@ -110,10 +110,11 @@ export default function OpeningIntro({ onComplete, onMusicStart }) {
             {stage > 0 && (
               <motion.button
                 onClick={handleSkip}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 0.7 }}
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 0.75, y: 0 }}
+                whileHover={{ opacity: 1, scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="absolute right-6 top-7 pointer-events-auto text-[9px] uppercase tracking-[0.25em] text-cream-200 px-3.5 py-1.5 border border-gold-500/30 rounded-full backdrop-blur-md bg-black/40 hover:opacity-100 transition-opacity"
+                className="absolute right-6 top-16 pointer-events-auto text-[9px] uppercase tracking-[0.25em] text-cream-200 px-3.5 py-1.5 border border-gold-500/30 rounded-full backdrop-blur-md bg-black/50 shadow-[0_4px_15px_rgba(0,0,0,0.6)] transition-all"
               >
                 Skip ✕
               </motion.button>
