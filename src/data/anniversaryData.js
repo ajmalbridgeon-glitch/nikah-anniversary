@@ -74,20 +74,20 @@ export const anniversaryConfig = {
     events: [
       {
         number: "01",
-        title: "Walking Into My Life",
-        date: "AUGUST 19, 2023",
-        description: "The moment you stepped into the room in your peach bridal attire, my heart knew every prayer had been answered.",
-        image: "/photos/timeline_01.jpg",
-        position: "object-[center_15%]",
-      },
-      {
-        number: "02",
         title: "Our Sacred Nikah",
         date: "AUGUST 19, 2023",
         description: "With 'Qubool Hai' spoken before Allah and our families, two souls were bound into one eternal covenant. The most blessed day of my life.",
         image: "/photos/timeline_02.jpg",
         position: "object-center",
         highlight: true,
+      },
+      {
+        number: "02",
+        title: "Walking Into My Life",
+        date: "AUGUST 19, 2023",
+        description: "The moment you stepped into the room in your peach bridal attire, my heart knew every prayer had been answered.",
+        image: "/photos/timeline_01.jpg",
+        position: "object-[center_15%]",
       },
       {
         number: "03",
